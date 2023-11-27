@@ -1,0 +1,84 @@
+{% extends 'auction/layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    
+	<div class="m-3" class="row">
+		<div class="column">
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+            	<h3>Listing - {{item.name}}</a></h3>
+            	
+                <p id="change"><a href="{% url 'Add-watchlist' item.id %}">
+                    <button id="watchlist" class="btn btn-sm btn-info active">
+                        Add to Watchlist &emsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16">
+                            <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                        </svg>
+                    </button>
+                </a></p>
+
+                {% if item.product_img %}
+                    <img src="{{item.product_img.url}}" height="180" width="190">
+                {% else %}
+                    <img src="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png" height="180" width="190">
+                {% endif %}
+                
+              	<p class="article-content">Description - {{item.note}}</p>
+              	<h3><p class="article-content"> ${{item.bid}}</p></h3>
+                <p class="article-content">
+                
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+                <form action ="" method = 'POST'>
+                	{% csrf_token %}
+                	{{form|crispy}}
+                	<input  class="btn-sm btn-info" class="m-2" type="submit" value="Place Bid">
+                </form>
+                
+                <h5><p class="m-2">Detail</p></h5>
+                <ul>
+                	<li>Listed by - {{item.owner}}</li>
+                	<li>Category - {{item.category}}</li>
+                	<li>Created on - {{item.created_on}}</li>
+                </ul>
+            </div>
+            <div class="m-2">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{commentform|crispy}}
+                    <input class="btn-sm btn-info" class="m-2" type="submit" value="Post">
+                    <hr>
+                    
+                    <h5><p class="m-2">Comments &ensp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-text-fill" viewBox="0 0 16 16">
+                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/></svg></p></h5>
+                    
+                    <hr>
+                    <div>
+                        <div>
+                            {% for view in comments %}
+                                 &emsp; &ensp; &ensp;<strong>{{ view.commenter }}</strong>
+                                - {{view.comment}}
+                                <hr>
+                            {% empty %}
+                                <h6 class="m-2">Nothing to show...</h6>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+          </div>
+        </article>
+	  	<div>
+	</div>
+
+{% endblock %}

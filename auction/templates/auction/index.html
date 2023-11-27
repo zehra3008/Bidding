@@ -1,0 +1,59 @@
+{% extends 'auction/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	<h3 class="m-4">{{title}}</h3>
+	<hr>
+
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
+
+{% for img in images %}
+	<div class="container">
+  		<div class="row">
+		    <div class="col-3">
+		    	<img src="images/img">
+		    </div>
+		</div>
+	</div>
+{% endfor %}
+	
+
+{% for item in product %}
+	<div class="container">
+  		<div class="row">
+		    <div class="col-3">
+		    	{% if item.product_img %}
+		    		<img src="{{item.product_img.url}}" height="180" width="190">
+		    	{% else %}
+		    		<img src="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png" height="180" width="190">
+		    	{% endif %}
+		    </div>
+		    <div class="col-5">
+				<h4>{{item.name}}</h4>
+				<strong><p>Price : ${{item.bid}}</p></strong>
+				<small><p>Created on- {{item.created_on}}</p></small>
+				<a href="{% url 'detail' item.id %}"><h6>View More</h6></a>
+				
+		    </div>
+		 	<hr>
+		</div>
+		<hr>
+	</div>
+{% empty %}
+	
+	<div  class="m-4">
+		<h6>Nothing to show</h6>
+		<h6>ADD SOMETHING TO VIEW...</h6> 
+	</div>
+
+{% endfor %}
+	
+{% endblock %}
+

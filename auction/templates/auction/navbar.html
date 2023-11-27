@@ -1,0 +1,67 @@
+<style type="text/css">
+  .msg{
+    font-size: 18px;
+    color: whitesmoke;
+  }
+  .title{
+    font-size: 25px;
+    font-style: bold;
+  }
+  .changeColor{
+    color: whitesmoke;
+    font-size: 18px;
+  }
+  .change{
+    color: whitesmoke;
+    text-shadow: darkred;
+    font-size: 25px;
+  }
+</style>
+
+
+
+<header class="site-header">
+<nav  class="navbar navbar-expand-lg navbar-secondary bg-secondary">
+  <div class="container">
+  <applet class="change" class="title">Auction</applet>  &nbsp; &nbsp; &nbsp;
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="changeColor" class="nav-link" href="{% url 'index' %}">ActiveList<span class="sr-only"></span></a>
+      </li> &nbsp; &nbsp;
+      <li class="nav-item">
+        <a class="changeColor" class="nav-link" href="{% url 'create' %}">Create</a>
+      </li> &nbsp; &nbsp;
+      <li class="nav-item">
+        <a class="changeColor" class="nav-link" href="{% url 'WatchList' %}">WatchList</a>
+      </li> &nbsp; &nbsp;
+      <li class="nav-item dropdown">
+          <a class="changeColor" class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{%  url 'categories' 'Cars' %}">Cars</a></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Paintings' %}">Paintings</a></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Vintage glassware' %}">Vintage glassware</a></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Musical instruments' %}">Musical instruments</a></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Collectibles' %}">Collectibles</a></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Books' %}">Books</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'categories' 'Other' %}">Other</a></li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+  <div>
+    <strong><span class="msg">{{request.user}}</span></strong>&emsp;
+    <span class="msg"><a href="{% url 'logout' %}">Logout</a></span>
+  </div>
+</nav>
+</header>
+
+
+
+
